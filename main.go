@@ -3,13 +3,14 @@ package main
 import (
 	"log"
 
-	"github.com/oduortoni/distributed/lib/p2p/transport"
+	"github.com/oduortoni/distributed/lib/p2p/tcp"
 )
 
 func main() {
-	tcp := transport.NewTCP(":9000")
+	tcp := tcp.NewTCP(":9000")
 	err := tcp.ListenAndAccept()
 	if err != nil {
 		log.Fatalf("ERROR: %s\n", err)
 	}
+	select {}
 }

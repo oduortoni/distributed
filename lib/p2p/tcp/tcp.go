@@ -1,4 +1,4 @@
-package transport
+package tcp
 
 import (
 	"fmt"
@@ -40,6 +40,16 @@ func (tcp *TCP) ListenAndAccept() error {
 }
 
 func (tcp *TCP) handleConnection(conn net.Conn) {
-	fmt.Printf("Incoming: %+v\n", conn)
-	fmt.Fprintf(conn, "%s\n", "Hello there")
+	peer := NewPeer(conn, true)
+	fmt.Printf("Incoming: %+v\n", peer)
+
+
+	buffer := []byte{}
+	for {
+		n, _ := conn.Read(buffer)
+		msg := buffer[:n]
+		if string(msg) != "" {
+			fmt.Fprintf(conn, "@server: %q\n", msg)
+		}
+	}
 }
