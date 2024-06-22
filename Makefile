@@ -1,8 +1,8 @@
 build:
-	go build -o bin/distributed
+	@go build -o bin/distributed
 
 run:
-	./bin/distributed
+	@./bin/distributed
 
 test:
-	go test ./... -v
+	@go test ./... -v
